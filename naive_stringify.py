@@ -13,21 +13,19 @@ def main():
                 col_name = col['text']
                 table[col_name] = []
                 col_order.append(col_name)
-
+            import ipdb; ipdb.set_trace()
             for row_cell in range(len(contents['tableData'])):
-                print('row cell ind: {} num total: {}'.format(row_cell, len(contents['tableData'])))
                 for col_cell in range(len(contents['tableData'][row_cell])):
                     col_name = col_order[col_cell]
                     data = contents['tableData'][row_cell][col_cell]['text']
                     if data == '': 
                         continue
-                    print('col: {} data: {}'.format(col_name, data))
                     table[col_name].append(data)    
             try: 
                 tbl = pd.DataFrame.from_dict(table)
-                print(tbl.to_string())
                 tbls.append(tbl)
-            except Exception as e: 
+            except Exception as e:
+                print('SKIPPING') 
                 continue 
     
 
