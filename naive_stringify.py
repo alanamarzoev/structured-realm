@@ -12,6 +12,8 @@ def main():
                 col_name = col['text']
                 table[col_name] = []
                 col_order.append(col_name)
+                
+            import ipdb; ipdb.set_trace()
 
             for row_cell in range(len(contents)):
                 for col_cell in range(len(contents[0])):
