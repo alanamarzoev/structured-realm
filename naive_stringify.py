@@ -25,7 +25,7 @@ def main():
                     table[col_name].append(data)    
 
             tbl = pd.DataFrame.from_dict(table)
-            print(tbl.to_string()
+            print(tbl.to_string())
             tbls.append(tbl)
 
     
