@@ -13,7 +13,7 @@ def main():
                 table[col_name] = []
                 col_order.append(col_name)
 
-            for row_cell in range(len(contents)):
+            for row_cell in range(len(contents['tableData'])):
                 print('row cell ind: {} num total: {}'.format(row_cell, len(contents['tableData'])))
                 for col_cell in range(len(contents['tableData'][row_cell])):
                     col_name = col_order[col_cell]
