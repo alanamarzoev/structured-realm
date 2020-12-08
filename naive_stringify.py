@@ -23,11 +23,12 @@ def main():
                         continue
                     print('col: {} data: {}'.format(col_name, data))
                     table[col_name].append(data)    
-
-            tbl = pd.DataFrame.from_dict(table)
-            print(tbl.to_string())
-            tbls.append(tbl)
-
+            try: 
+                tbl = pd.DataFrame.from_dict(table)
+                print(tbl.to_string())
+                tbls.append(tbl)
+            except Exception as e: 
+                continue 
     
 
 if __name__ == '__main__': 
