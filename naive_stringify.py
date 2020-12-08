@@ -1,7 +1,7 @@
 import json 
 import pandas as pd 
 
-def main():
+def get_dataframes():
     with open('tables_small.json', 'r') as j:
         lines = j.readlines()
         tbls = {}
@@ -33,10 +33,44 @@ def main():
             except Exception as e:
                 print('SKIPPING') 
                 continue 
+        return tbls
 
-        print(tbls)
 
-    
+def load_doc(path):  
+    """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
+    gzip_option = tf.python_io.TFRecordOptions(
+        tf.python_io.TFRecordCompressionType.GZIP)
+
+    def get_bytes_feature(ex, name):
+        return list(ex.features.feature[name].bytes_list.value)
+
+    def get_ints_feature(ex, name):
+        # 32-bit Numpy arrays are more memory-efficient than Python lists.
+        return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
+
+    docs = []
+    for val in tf.python_io.tf_record_iterator(path, gzip_option):
+        ex = tf.train.Example.FromString(val)
+        title = get_bytes_feature(ex, 'title')[0]
+        body = get_bytes_feature(ex, 'body')[0]    
+
+    doc_uid = featurization.get_document_uid(title, body)
+    title_token_ids = get_ints_feature(ex, 'title_token_ids')
+    body_token_ids = get_ints_feature(ex, 'body_token_ids')
+
+    doc = featurization.Document(
+        uid=doc_uid,
+        title_token_ids=title_token_ids,
+        body_token_ids=body_token_ids)
+    docs.append(doc)
+    import ipdb; ipdb.set_trace()
+    return docs
+
+
+def main():
+    example_path = '/raid/lingo/marzoev/structured-realm/language/realm-data-small/pretrain_corpus_small/wikipedia_annotated_with_dates_public-00000-of-00020.tfrecord.gz'
+    load_doc(example_path)
+        
 
 if __name__ == '__main__': 
     main()
