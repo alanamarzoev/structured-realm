@@ -23,7 +23,7 @@ def main():
                     print('col: {} data: {}'.format(col_name, data))
                     table[col_name].append(data)    
 
-            pd.DataFrame.from_dict(table)
+            tbl = pd.DataFrame.from_dict(table)
             import ipdb; ipdb.set_trace()
 
 
