@@ -14,6 +14,7 @@ def main():
                 col_order.append(col_name)
 
             for row_cell in range(len(contents)):
+                print('row cell ind: {} num total: {}'.format(row_cell, len(contents['tableData'])))
                 for col_cell in range(len(contents['tableData'][row_cell])):
                     col_name = col_order[col_cell]
                     data = contents['tableData'][row_cell][col_cell]['text']
