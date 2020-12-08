@@ -2,8 +2,9 @@ import json
 
 
 def main():
-    json_list = json.loads('tables.json') 
-    import ipdb; ipdb.set_trace()
+    with open(json_file_path, 'r') as j:
+        contents = json.loads(j.read())
+        import ipdb; ipdb.set_trace()
 
 
 
