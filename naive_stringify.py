@@ -16,11 +16,11 @@ def main():
             import ipdb; ipdb.set_trace()
 
             for row_cell in range(len(contents)):
-                import ipdb; ipdb.set_trace()
-                # for col_cell in range((contents[row_cell]):
-                #     col_name = col_order[col_cell]
-                #     data = contents['tableData'][row_cell][col_cell]['text']
-                #     table[col_name].append(data)
+                # import ipdb; ipdb.set_trace()
+                for col_cell in range((contents['tableData'][row_cell]):
+                    col_name = col_order[col_cell]
+                    data = contents['tableData'][row_cell][col_cell]['text']
+                    table[col_name].append(data)
 
             pd.DataFrame.from_dict(table)
             import ipdb; ipdb.set_trace()
