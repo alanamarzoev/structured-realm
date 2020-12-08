@@ -4,6 +4,7 @@ import pandas as pd
 def main():
     with open('tables_small.json', 'r') as j:
         lines = j.readlines()
+        tbls = []
         for line in lines: 
             contents = json.loads(line)
             table = {}
@@ -24,8 +25,10 @@ def main():
                     table[col_name].append(data)    
 
             tbl = pd.DataFrame.from_dict(table)
-            import ipdb; ipdb.set_trace()
+            print(tbl.to_string()
+            tbls.append(tbl)
 
+    
 
 if __name__ == '__main__': 
     main()
