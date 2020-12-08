@@ -2,7 +2,7 @@ import json
 
 
 def main():
-    with open('tables.json', 'r') as j:
+    with open('tables_small.json', 'r') as j:
         contents = json.loads(j.read())
         import ipdb; ipdb.set_trace()
 
