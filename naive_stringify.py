@@ -18,7 +18,7 @@ def main():
                 for col_cell in range(len(contents['tableData'][row_cell])):
                     col_name = col_order[col_cell]
                     data = contents['tableData'][row_cell][col_cell]['text']
-                    print('data: {}'.format(data))
+                    print('col: {} data: {}'.format(col_name, data))
                     table[col_name].append(data)    
 
             pd.DataFrame.from_dict(table)
