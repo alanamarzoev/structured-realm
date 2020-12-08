@@ -17,8 +17,6 @@ def main():
 
             for row_cell in range(len(contents)):
                 for col_cell in range(len(contents['tableData'][row_cell])):
-                    print('hi')
-                    import ipdb; ipdb.set_trace()
                     col_name = col_order[col_cell]
                     data = contents['tableData'][row_cell][col_cell]['text']
                     table[col_name].append(data)
