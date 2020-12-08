@@ -67,18 +67,19 @@ def load_doc(path):
             ex = tf.train.Example.FromString(val)
             title = get_bytes_feature(ex, 'title')[0]
             body = get_bytes_feature(ex, 'body')[0]    
+            doc_uid = featurization.get_document_uid(title, body)
+            title_token_ids = get_ints_feature(ex, 'title_token_ids')
+            body_token_ids = get_ints_feature(ex, 'body_token_ids')
+
+            doc = featurization.Document(
+                uid=doc_uid,
+                title_token_ids=title_token_ids,
+                body_token_ids=body_token_ids)
+            docs.append(doc)
         except Exception as e: 
             continue
 
-    doc_uid = featurization.get_document_uid(title, body)
-    title_token_ids = get_ints_feature(ex, 'title_token_ids')
-    body_token_ids = get_ints_feature(ex, 'body_token_ids')
-
-    doc = featurization.Document(
-        uid=doc_uid,
-        title_token_ids=title_token_ids,
-        body_token_ids=body_token_ids)
-    docs.append(doc)
+    
     import ipdb; ipdb.set_trace()
     return docs
 
