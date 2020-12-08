@@ -63,10 +63,12 @@ def load_doc(path):
 
     docs = []
     for val in tf.python_io.tf_record_iterator(path, gzip_option):
-        ex = tf.train.Example.FromString(val)
-        import ipdb; ipdb.set_trace()
-        title = get_bytes_feature(ex, 'title')[0]
-        body = get_bytes_feature(ex, 'body')[0]    
+        try: 
+            ex = tf.train.Example.FromString(val)
+            title = get_bytes_feature(ex, 'title')[0]
+            body = get_bytes_feature(ex, 'body')[0]    
+        except Exception as e: 
+            continue
 
     doc_uid = featurization.get_document_uid(title, body)
     title_token_ids = get_ints_feature(ex, 'title_token_ids')
