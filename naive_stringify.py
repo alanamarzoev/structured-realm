@@ -34,7 +34,7 @@ def main():
                 print('SKIPPING') 
                 continue 
 
-    
+        print(tbls)
 
     
 
