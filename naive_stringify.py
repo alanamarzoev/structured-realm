@@ -10,6 +10,7 @@ from absl import logging
 from language.realm import featurization
 from language.realm import parallel
 from language.realm import profile
+from language.realm.refresh_doc_embeds import load_featurizer
 from subprocess import check_call
 
 import numpy as np
@@ -70,21 +71,22 @@ def load_doc(tbls):
     # gzip_option = tf.python_io.TFRecordOptions(
     #     tf.python_io.TFRecordCompressionType.GZIP)
 
-    def get_bytes_feature(ex, name):
-        return list(ex.features.feature[name].bytes_list.value)
+    # def get_bytes_feature(ex, name):
+    #     return list(ex.features.feature[name].bytes_list.value)
 
-    def get_ints_feature(ex, name):
-        # 32-bit Numpy arrays are more memory-efficient than Python lists.
-        return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
+    # def get_ints_feature(ex, name):
+    #     # 32-bit Numpy arrays are more memory-efficient than Python lists.
+    #     return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
 
     docs = []
+    featurizer = load_featurizer()
     for capt, tbl_info in tbls.items(): 
         title = capt 
         body = tbl_info['data'].to_string()
         # doc_uid = featurization.get_document_uid(title, body)
-        title_token_ids = get_ints_feature(ex, 'title_token_ids')
-        body_token_ids = get_ints_feature(ex, 'body_token_ids')
+
         doc_uid = tbl_info['id']
+        import ipdb; ipdb.set_trace()
         doc = featurization.Document(
             uid=doc_uid,
             title_token_ids=title_token_ids,
