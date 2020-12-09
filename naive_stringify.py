@@ -61,7 +61,7 @@ def get_dataframes():
                 continue 
         with open('tables_preproc.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
-                g.write(json.dumps(v)) 
+                g.write(json.dumps(v) + '\n') 
 
         return tbls
 
