@@ -120,6 +120,7 @@ def main(_):
                    e)
       current_export_path = None
 
+    print(current_export_path)
     # If there is no Hub module, or it hasn't changed, try this loop again.
     if (current_export_path is None or
         previous_export_path == current_export_path):
