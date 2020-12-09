@@ -174,6 +174,7 @@ def count_tf_records_parallel(file_paths, num_processes=None):
       counts[file_idx] = count
       logging.info('Counted %d / %d files.', i + 1, num_files)
 
+  print('Returning {}'.format(counts))
   return counts
 
 
