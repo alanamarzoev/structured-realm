@@ -191,18 +191,22 @@ def load_documents(path):
   for val in tf.python_io.tf_record_iterator(path, gzip_option):
     ex = tf.train.Example.FromString(val)
     print(ex)
-    title = get_bytes_feature(ex, 'title')[0]
-    body = get_bytes_feature(ex, 'body')[0]
+    try: 
+        title = get_bytes_feature(ex, 'title')[0]
+        body = get_bytes_feature(ex, 'body')[0]
 
-    doc_uid = featurization.get_document_uid(title, body)
-    title_token_ids = get_ints_feature(ex, 'title_token_ids')
-    body_token_ids = get_ints_feature(ex, 'body_token_ids')
-    print('IDS: {}'.format(title_token_ids))
-    doc = featurization.Document(
-        uid=doc_uid,
-        title_token_ids=title_token_ids,
-        body_token_ids=body_token_ids)
-    docs.append(doc)
+        doc_uid = featurization.get_document_uid(title, body)
+        title_token_ids = get_ints_feature(ex, 'title_token_ids')
+        body_token_ids = get_ints_feature(ex, 'body_token_ids')
+        print('IDS: {}'.format(title_token_ids))
+        doc = featurization.Document(
+            uid=doc_uid,
+            title_token_ids=title_token_ids,
+            body_token_ids=body_token_ids)
+        docs.append(doc)
+    except Exception as e: 
+        print(e)
+        continue
 
   return docs
 
