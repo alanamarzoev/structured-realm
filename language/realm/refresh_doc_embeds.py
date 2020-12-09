@@ -105,8 +105,9 @@ def main(_):
     tpu_workers = FLAGS.tpu_workers.split(",")
 
   doc_shard_paths = sorted(tf.gfile.Glob(FLAGS.retrieval_corpus_path))
-  doc_shard_sizes = retrieval.count_tf_records_parallel(
-      doc_shard_paths, num_processes=12)
+  # doc_shard_sizes = retrieval.count_tf_records_parallel(doc_shard_paths, num_processes=12)
+  doc_shard_sizes = retrieval.count_tf_records(doc_shard_paths)
+  
 
   previous_export_path = None
   while True:
