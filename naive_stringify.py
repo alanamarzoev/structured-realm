@@ -80,13 +80,12 @@ def load_doc(tbls):
 
     # tokenizer = featurization.Tokenizer(
     #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
-
-    BertTokenizer = bert.tokenization.bert_tokenization.FullTokenizer
     bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
                                 trainable=False)
     vocabulary_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
     to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
-    tokenizer = BertTokenizer(vocabulary_file, to_lower_case)
+    tokenizer = tokenization.FullTokenizer(
+    vocab_file=vocab_file, do_lower_case=True)
 
     for capt, tbl_info in tbls.items(): 
         title = capt 
