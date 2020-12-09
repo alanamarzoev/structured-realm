@@ -78,21 +78,18 @@ def load_doc(tbls):
 
     docs = []
     for capt, tbl_info in tbls.items(): 
-        try: 
-            title = capt 
-            body = tbl_info['data'].to_string()
-            doc_uid = featurization.get_document_uid(title, body)
-            title_token_ids = get_ints_feature(ex, 'title_token_ids')
-            body_token_ids = get_ints_feature(ex, 'body_token_ids')
+        title = capt 
+        body = tbl_info['data'].to_string()
+        doc_uid = featurization.get_document_uid(title, body)
+        title_token_ids = get_ints_feature(ex, 'title_token_ids')
+        body_token_ids = get_ints_feature(ex, 'body_token_ids')
 
-            doc = featurization.Document(
-                uid=doc_uid,
-                title_token_ids=title_token_ids,
-                body_token_ids=body_token_ids)
-            docs.append(doc)
-        except Exception as e: 
-            continue
-
+        doc = featurization.Document(
+            uid=doc_uid,
+            title_token_ids=title_token_ids,
+            body_token_ids=body_token_ids)
+        docs.append(doc)
+    
     import ipdb; ipdb.set_trace()
     return docs
 
