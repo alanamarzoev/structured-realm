@@ -23,6 +23,7 @@ def get_dataframes():
         tbls = {}
         for line in lines: 
             contents = json.loads(line)
+            import ipdb; ipdb.set_trace()
             table = {}
             col_order = []
             for i, col in enumerate(contents['tableHeaders'][0]): 
@@ -80,7 +81,7 @@ def load_doc(tbls):
     for capt, tbl_info in tbls.items(): 
         title = capt 
         body = tbl_info['data'].to_string()
-        doc_uid = featurization.get_document_uid(title, body)
+        # doc_uid = featurization.get_document_uid(title, body)
         title_token_ids = get_ints_feature(ex, 'title_token_ids')
         body_token_ids = get_ints_feature(ex, 'body_token_ids')
 
