@@ -105,7 +105,7 @@ def int_feature(values):
 
 def load_json_data(input_path):
   with tf.gfile.Open(input_path) as input_file:
-    import ipdb; ipdb.set_trace()
+  
     for doc_idx, json_serialized in enumerate(input_file):
       yield doc_idx, json_serialized
       if doc_idx >= FLAGS.total_documents:
