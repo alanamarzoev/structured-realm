@@ -61,7 +61,6 @@ class DocumentProcessor(object):
 
   def __call__(self, input_data):
     doc_idx, json_serialized = input_data
-    lines = json_serialized.readlines()
     doc_dict = json.loads(json_serialized)
     title = doc_dict['title']
     body = doc_dict['body']
