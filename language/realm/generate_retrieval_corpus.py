@@ -48,7 +48,7 @@ flags.DEFINE_string('vocab_path', None, 'Path to vocabulary file.')
 
 flags.DEFINE_boolean('do_lower_case', True, 'Whether to lowercase text.')
 
-flags.DEFINE_boolean('parallel', True,
+flags.DEFINE_boolean('parallel', False,
                      'Whether to process docs in parallel (multiprocessing).')
 
 
