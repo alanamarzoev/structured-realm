@@ -99,6 +99,7 @@ class BruteForceRetriever(Retriever):
     self._query_embedder = query_embedder
     self._num_neighbors = num_neighbors
     self._documents = documents
+    print('DOCS EMB PATH : {}'.format(doc_embeds_or_path))
 
     # Load embeddings.
     if isinstance(doc_embeds_or_path, str):
