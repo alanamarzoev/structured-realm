@@ -108,7 +108,7 @@ def main(_):
   # doc_shard_sizes = retrieval.count_tf_records_parallel(doc_shard_paths, num_processes=12)
   doc_shard_sizes = [retrieval.count_tf_records(path) for path in doc_shard_paths]
   
-  print(FLAGS.model_dir)
+  print('MODEL DIR: {}'.format(FLAGS.model_dir))
 
   previous_export_path = None
   while True:
