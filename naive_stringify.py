@@ -79,22 +79,21 @@ def load_doc(tbls):
     #     return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
 
     docs = []
-    featurizer = load_featurizer()
+    params_path = os.path.join('out', "estimator_params.json")
+
+    with tf.gfile.GFile(params_path) as f:
+        params = json.load(f)
+
+    tokenizer = featurization.Tokenizer(
+        vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
+
     for capt, tbl_info in tbls.items(): 
         title = capt 
         body = tbl_info['data'].to_string()
         # doc_uid = featurization.get_document_uid(title, body)
 
         doc_uid = tbl_info['id']
-       
-        params_path = os.path.join('out', "estimator_params.json")
-
-        with tf.gfile.GFile(params_path) as f:
-            params = json.load(f)
-
-        tokenizer = featurization.Tokenizer(
-            vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
-
+        import ipdb; ipdb.set_trace()
         doc = featurization.Document(
             uid=doc_uid,
             title_token_ids=title_token_ids,
