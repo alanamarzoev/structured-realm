@@ -193,7 +193,7 @@ def load_documents(path):
     doc_uid = featurization.get_document_uid(title, body)
     title_token_ids = get_ints_feature(ex, 'title_token_ids')
     body_token_ids = get_ints_feature(ex, 'body_token_ids')
-
+    print('IDS: {}'.format(title_token_ids))
     doc = featurization.Document(
         uid=doc_uid,
         title_token_ids=title_token_ids,
