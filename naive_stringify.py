@@ -7,6 +7,7 @@ import abc
 from concurrent import futures
 import time
 import os
+import bert
 
 from absl import logging
 from language.realm import featurization
