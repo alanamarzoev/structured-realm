@@ -52,27 +52,22 @@ def get_dataframes():
         return tbls
 
 
-def gzipFile(path):
-    check_call('gzip ' + path)
-
-
-def convert_dataframes(tbls): 
-    json_list = []
-    path = 'dataset.tfrecord'
-    with open(path, 'a+') as f: 
-        for capt, info in tbls.items(): 
-            info['title'] = capt 
-            info['body'] = info['data'].to_string()
-            del info['data']
-            jsoned = json.dumps(info)
+# def convert_dataframes(tbls): 
+#     json_list = []
+#     path = 'dataset.tfrecord'
+#     with open(path, 'a+') as f: 
+#         for capt, info in tbls.items(): 
+#             info['title'] = capt 
+#             info['body'] = info['data'].to_string()
+#             del info['data']
+#             jsoned = json.dumps(info)
             f.write(jsoned)
-    gzipFile(path)
       
 
-def load_doc(path):  
+def load_doc(tbls):  
     """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
-    gzip_option = tf.python_io.TFRecordOptions(
-        tf.python_io.TFRecordCompressionType.GZIP)
+    # gzip_option = tf.python_io.TFRecordOptions(
+    #     tf.python_io.TFRecordCompressionType.GZIP)
 
     def get_bytes_feature(ex, name):
         return list(ex.features.feature[name].bytes_list.value)
@@ -82,11 +77,10 @@ def load_doc(path):
         return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
 
     docs = []
-    for val in tf.python_io.tf_record_iterator(path, gzip_option):
+    for capt, tbl_info in tbls.items(): 
         try: 
-            ex = tf.train.Example.FromString(val)
-            title = get_bytes_feature(ex, 'title')[0]
-            body = get_bytes_feature(ex, 'body')[0]    
+            title = capt 
+            body = tbl_info['data'].to_string()
             doc_uid = featurization.get_document_uid(title, body)
             title_token_ids = get_ints_feature(ex, 'title_token_ids')
             body_token_ids = get_ints_feature(ex, 'body_token_ids')
