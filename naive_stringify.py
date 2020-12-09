@@ -103,7 +103,7 @@ def main():
         
 
 # FLAGS = flags.FLAGS
-flags.DEFINE_boolean('preserve_unused_tokens', True, '')
+# flags.DEFINE_boolean('preserve_unused_tokens', True, '')
 
 
 if __name__ == '__main__':
