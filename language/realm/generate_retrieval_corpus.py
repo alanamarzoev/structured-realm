@@ -153,7 +153,7 @@ def main(unused_argv):
 
   examples = [None] * FLAGS.total_documents
   print(len(list(results)))
-  print(results)
+  print(list(results))
   for doc_idx, example in results:
     examples[doc_idx] = example
     docs_processed += 1
