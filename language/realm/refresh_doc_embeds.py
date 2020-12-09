@@ -114,14 +114,13 @@ def main(_):
     try:
       current_export_path = export_utils.best_export_path(
           FLAGS.model_dir, best_prefix="tf_hub")
+      print(current_export_path)
     except tf.errors.NotFoundError as e:
-      raise
       logging.warn("An error occurred while looking for an exported module: %s",
                    e)
       current_export_path = None
 
-    print(current_export_path)
-    # If there is no Hub module, or it hasn't changed, try this loop again.
+    print(current_export_pathle, or it hasn't changed, try this loop again.
     if (current_export_path is None or
         previous_export_path == current_export_path):
       continue
