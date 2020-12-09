@@ -1,5 +1,7 @@
 import json 
 import pandas as pd 
+from absl import app
+from absl import flags
 
 import abc
 from concurrent import futures
@@ -100,5 +102,9 @@ def main():
     load_doc(tbls)
         
 
-if __name__ == '__main__': 
-    main()
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean('preserve_unused_tokens', True, '')
+
+
+if __name__ == '__main__':
+  app.run(main)
