@@ -19,7 +19,7 @@
 # Change the data and output directories here:
 
 # Data directory
-DATA_DIR='language/realm/tables_preproc'
+DATA_DIR='gs://realm-data/realm-data-small'
 
 # Output directory
 MODEL_DIR='./out/'
@@ -31,7 +31,7 @@ MODEL_DIR='./out/'
 PRETRAIN_CORPUS_PATH="${DATA_DIR}/pretrain_corpus_small/wikipedia_annotated_with_dates_public*.tfrecord.gz"
 
 # Knowledge corpus (Glob of gzip TFRecords)
-RETRIEVAL_CORPUS_PATH="${DATA_DIR}/retrieval_corpus_small/docs.small.tfr.gz-*-of-*"
+RETRIEVAL_CORPUS_PATH="language/realm/tables_preproc/None-00000-of-00001"
 
 # Initial BERT hub module for the Knowledge-Augmented Encoder p(y | z, x)
 BERT_MODULE_PATH='https://tfhub.dev/google/small_bert/bert_uncased_L-2_H-128_A-2/1'
