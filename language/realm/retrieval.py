@@ -175,35 +175,35 @@ def count_tf_records_parallel(file_paths, num_processes=None):
   return counts
 
 
-# def load_documents(path):
-#   """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
-#   gzip_option = tf.python_io.TFRecordOptions(
-#       tf.python_io.TFRecordCompressionType.GZIP)
+def load_documents(path):
+  """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
+  gzip_option = tf.python_io.TFRecordOptions(
+      tf.python_io.TFRecordCompressionType.GZIP)
 
-#   def get_bytes_feature(ex, name):
-#     return list(ex.features.feature[name].bytes_list.value)
+  def get_bytes_feature(ex, name):
+    return list(ex.features.feature[name].bytes_list.value)
 
-#   def get_ints_feature(ex, name):
-#     # 32-bit Numpy arrays are more memory-efficient than Python lists.
-#     return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
+  def get_ints_feature(ex, name):
+    # 32-bit Numpy arrays are more memory-efficient than Python lists.
+    return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
 
-#   docs = []
-#   for val in tf.python_io.tf_record_iterator(path, gzip_option):
-#     ex = tf.train.Example.FromString(val)
-#     title = get_bytes_feature(ex, 'title')[0]
-#     body = get_bytes_feature(ex, 'body')[0]
+  docs = []
+  for val in tf.python_io.tf_record_iterator(path, gzip_option):
+    ex = tf.train.Example.FromString(val)
+    title = get_bytes_feature(ex, 'title')[0]
+    body = get_bytes_feature(ex, 'body')[0]
 
-#     doc_uid = featurization.get_document_uid(title, body)
-#     title_token_ids = get_ints_feature(ex, 'title_token_ids')
-#     body_token_ids = get_ints_feature(ex, 'body_token_ids')
-#     print('IDS: {}'.format(title_token_ids))
-#     doc = featurization.Document(
-#         uid=doc_uid,
-#         title_token_ids=title_token_ids,
-#         body_token_ids=body_token_ids)
-#     docs.append(doc)
+    doc_uid = featurization.get_document_uid(title, body)
+    title_token_ids = get_ints_feature(ex, 'title_token_ids')
+    body_token_ids = get_ints_feature(ex, 'body_token_ids')
+    print('IDS: {}'.format(title_token_ids))
+    doc = featurization.Document(
+        uid=doc_uid,
+        title_token_ids=title_token_ids,
+        body_token_ids=body_token_ids)
+    docs.append(doc)
 
-#   return docs
+  return docs
 
 def get_dataframes():
     with open('tables_small.json', 'r') as j:
@@ -241,39 +241,39 @@ def get_dataframes():
         return tbls
 
 
-def load_documents(x):  
-    print(tf.executing_eagerly())
-    tbls = get_dataframes()
-    docs = []
-    # params_path = os.path.join('out', "estimator_params.json")
+# def load_documents(x):  
+#     print(tf.executing_eagerly())
+#     tbls = get_dataframes()
+#     docs = []
+#     # params_path = os.path.join('out', "estimator_params.json")
 
-    # with tf.gfile.GFile(params_path) as f:
-    #     params = json.load(f)
+#     # with tf.gfile.GFile(params_path) as f:
+#     #     params = json.load(f)
 
-    # tokenizer = featurization.Tokenizer(
-    #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
-    bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
-                                trainable=False)
-    vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
-    # to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
-    tokenizer = tokenization.FullTokenizer(
-    vocab_file=vocab_file, do_lower_case=True)
+#     # tokenizer = featurization.Tokenizer(
+#     #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
+#     bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
+#                                 trainable=False)
+#     vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
+#     # to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
+#     tokenizer = tokenization.FullTokenizer(
+#     vocab_file=vocab_file, do_lower_case=True)
 
-    for capt, tbl_info in tbls.items(): 
-        title = capt 
-        body = tbl_info['data'].to_string()
-        doc_uid = tbl_info['id']
-        title_token_ids = tokenizer.tokenize(title)
-        title_token_ids = tokenizer.convert_tokens_to_ids(title_token_ids)
-        body_token_ids = tokenizer.tokenize(body)
-        body_token_ids = tokenizer.convert_tokens_to_ids(body_token_ids)
-        doc = featurization.Document(
-            uid=doc_uid,
-            title_token_ids=title_token_ids,
-            body_token_ids=body_token_ids)
-        docs.append(doc)
+#     for capt, tbl_info in tbls.items(): 
+#         title = capt 
+#         body = tbl_info['data'].to_string()
+#         doc_uid = tbl_info['id']
+#         title_token_ids = tokenizer.tokenize(title)
+#         title_token_ids = tokenizer.convert_tokens_to_ids(title_token_ids)
+#         body_token_ids = tokenizer.tokenize(body)
+#         body_token_ids = tokenizer.convert_tokens_to_ids(body_token_ids)
+#         doc = featurization.Document(
+#             uid=doc_uid,
+#             title_token_ids=title_token_ids,
+#             body_token_ids=body_token_ids)
+#         docs.append(doc)
     
-    return docs
+#     return docs
 
 
 def load_documents_from_shard(args):
