@@ -82,7 +82,7 @@ def load_doc(tbls):
     #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
     bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
                                 trainable=False)
-    vocabulary_file = bert_layer.resolved_object.vocab_file.asset_path
+    vocab_file = bert_layer.resolved_object.vocab_file.asset_path
     # to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
     tokenizer = tokenization.FullTokenizer(
     vocab_file=vocab_file, do_lower_case=True)
