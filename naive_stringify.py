@@ -21,9 +21,7 @@ from subprocess import check_call
 import numpy as np
 import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
-tf.compat.v1.enable_eager_execution(
-    config=None, device_policy=None, execution_mode=None
-)
+
 
 
 def get_dataframes():
@@ -75,6 +73,7 @@ def get_dataframes():
       
 
 def load_doc(tbls):  
+    print(tf.executing_eagerly())
     docs = []
     # params_path = os.path.join('out', "estimator_params.json")
 
