@@ -103,11 +103,7 @@ def write_array_to_checkpoint(var_name, array, checkpoint_path):
 def main(_):
   if FLAGS.use_tpu:
     tpu_workers = FLAGS.tpu_workers.split(",")
-    
-  print()  
-  print('MODEL DIR: {}'.format(FLAGS.model_dir))
-  print()  
-  print()  
+
 
   doc_shard_paths = sorted(tf.gfile.Glob(FLAGS.retrieval_corpus_path))
   # doc_shard_sizes = retrieval.count_tf_records_parallel(doc_shard_paths, num_processes=12)
@@ -128,6 +124,7 @@ def main(_):
     if (current_export_path is None or
         previous_export_path == current_export_path):
       continue
+    print('GOT')
 
     # Read the step counter file. This file is written after the directory path
     # has been finalized, so it may appear after current_export_path changes.
