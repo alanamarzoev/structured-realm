@@ -177,6 +177,7 @@ def main(unused_argv):
     with tf.io.TFRecordWriter(shard_path, gzip_option) as output_writer:
       start_idx = num_docs_per_shard * shard_idx
       stop_idx = min(start_idx + num_docs_per_shard, FLAGS.total_documents)
+      print('start idx: {} stop idx: {}'.format(start_idx, stop_idx))
       for doc_idx in range(start_idx, stop_idx):
         output_writer.write(examples[doc_idx])
 
