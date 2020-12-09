@@ -67,17 +67,6 @@ def get_dataframes():
       
 
 def load_doc(tbls):  
-    """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
-    # gzip_option = tf.python_io.TFRecordOptions(
-    #     tf.python_io.TFRecordCompressionType.GZIP)
-
-    # def get_bytes_feature(ex, name):
-    #     return list(ex.features.feature[name].bytes_list.value)
-
-    # def get_ints_feature(ex, name):
-    #     # 32-bit Numpy arrays are more memory-efficient than Python lists.
-    #     return np.array(ex.features.feature[name].int64_list.value, dtype=np.int32)
-
     docs = []
     params_path = os.path.join('out', "estimator_params.json")
 
@@ -90,10 +79,9 @@ def load_doc(tbls):
     for capt, tbl_info in tbls.items(): 
         title = capt 
         body = tbl_info['data'].to_string()
-        # doc_uid = featurization.get_document_uid(title, body)
-
         doc_uid = tbl_info['id']
-        import ipdb; ipdb.set_trace()
+        title_token_ids = tokenizer.tokenize(title)
+        body_token_ids = tokenizer.tokenize(body)
         doc = featurization.Document(
             uid=doc_uid,
             title_token_ids=title_token_ids,
