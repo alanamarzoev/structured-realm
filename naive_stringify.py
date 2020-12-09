@@ -63,7 +63,7 @@ def convert_dataframes(tbls):
         for capt, info in tbls.items(): 
             info['title'] = capt 
             info['body'] = info['data'].to_string()
-            jsoned = info.to_json()
+            jsoned = json.dumps(info)
             f.write(jsoned)
     gzipFile(path)
       
@@ -98,7 +98,6 @@ def load_doc(path):
         except Exception as e: 
             continue
 
-    
     import ipdb; ipdb.set_trace()
     return docs
 
