@@ -14,11 +14,14 @@
 # limitations under the License.
 # Lint as: python3
 """Utilities for performing retrieval."""
+import tensorflow.compat.v1 as tf
+tf.enable_eager_execution()
 
 import abc
 from concurrent import futures
 import time
-
+import bert 
+from bert import tokenization
 import json 
 import pandas as pd 
 from absl import logging
@@ -26,7 +29,6 @@ from language.realm import featurization
 from language.realm import parallel
 from language.realm import profile
 import numpy as np
-import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
 
 
