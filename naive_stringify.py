@@ -83,7 +83,9 @@ def load_doc(tbls):
         body = tbl_info['data'].to_string()
         doc_uid = tbl_info['id']
         title_token_ids = tokenizer.tokenize(title)
+        title_token_ids = tokenizer.convert_tokens_to_ids(title_token_ids)
         body_token_ids = tokenizer.tokenize(body)
+        body_token_ids = tokenizer.convert_tokens_to_ids(body_token_ids)
         doc = featurization.Document(
             uid=doc_uid,
             title_token_ids=title_token_ids,
@@ -92,6 +94,7 @@ def load_doc(tbls):
     
     import ipdb; ipdb.set_trace()
     return docs
+
 
 
 def main(argv):
