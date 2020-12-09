@@ -190,6 +190,7 @@ def load_documents(path):
   docs = []
   for val in tf.python_io.tf_record_iterator(path, gzip_option):
     ex = tf.train.Example.FromString(val)
+    print(ex)
     title = get_bytes_feature(ex, 'title')[0]
     body = get_bytes_feature(ex, 'body')[0]
 
