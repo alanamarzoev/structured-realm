@@ -8,6 +8,8 @@ from concurrent import futures
 import time
 import os
 import bert
+from bert import tokenization
+
 
 from absl import logging
 from language.realm import featurization
