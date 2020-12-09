@@ -107,9 +107,12 @@ def main(_):
   doc_shard_paths = sorted(tf.gfile.Glob(FLAGS.retrieval_corpus_path))
   # doc_shard_sizes = retrieval.count_tf_records_parallel(doc_shard_paths, num_processes=12)
   doc_shard_sizes = [retrieval.count_tf_records(path) for path in doc_shard_paths]
-  
-  print('MODEL DIR: {}'.format(FLAGS.model_dir))
 
+  print()  
+  print('MODEL DIR: {}'.format(FLAGS.model_dir))
+  print()  
+  print()  
+  
   previous_export_path = None
   while True:
     try:
