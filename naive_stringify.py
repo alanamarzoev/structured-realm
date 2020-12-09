@@ -61,7 +61,7 @@ def get_dataframes():
 #             info['body'] = info['data'].to_string()
 #             del info['data']
 #             jsoned = json.dumps(info)
-            f.write(jsoned)
+            # f.write(jsoned)
       
 
 def load_doc(tbls):  
