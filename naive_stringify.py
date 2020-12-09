@@ -70,13 +70,20 @@ def get_dataframes():
 
 def load_doc(tbls):  
     docs = []
-    params_path = os.path.join('out', "estimator_params.json")
+    # params_path = os.path.join('out', "estimator_params.json")
 
-    with tf.gfile.GFile(params_path) as f:
-        params = json.load(f)
+    # with tf.gfile.GFile(params_path) as f:
+    #     params = json.load(f)
 
-    tokenizer = featurization.Tokenizer(
-        vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
+    # tokenizer = featurization.Tokenizer(
+    #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
+
+    BertTokenizer = bert.bert_tokenization.FullTokenizer
+    bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
+                                trainable=False)
+    vocabulary_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
+    to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
+    tokenizer = BertTokenizer(vocabulary_file, to_lower_case)
 
     for capt, tbl_info in tbls.items(): 
         title = capt 
