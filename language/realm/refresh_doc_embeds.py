@@ -111,11 +111,11 @@ def main(_):
 
   previous_export_path = None
   while True:
-    print('ahh')
     try:
       current_export_path = export_utils.best_export_path(
           FLAGS.model_dir, best_prefix="tf_hub")
     except tf.errors.NotFoundError as e:
+      raise
       logging.warn("An error occurred while looking for an exported module: %s",
                    e)
       current_export_path = None
