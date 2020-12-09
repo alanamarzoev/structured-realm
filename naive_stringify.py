@@ -50,18 +50,18 @@ def get_dataframes():
                 title = contents['pgTitle']
                 sec_title = contents['sectionTitle']
                 table_info = {}
-                table_info['data'] = tbl 
+                table_info['body'] = tbl.to_json()
                 table_info['sec_title'] = sec_title 
-                table_info['title'] = title 
+                table_info['pgtitle'] = title 
                 table_info['id'] = contents['tableId']
-                table_info['caption'] = caption 
+                table_info['title'] = caption 
                 tbls[caption] = table_info
             except Exception as e:
                 print('SKIPPING') 
                 continue 
         with open('tables_preproc.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
-                g.write(v.to_json()) 
+                g.write(json.dumps(v)) 
 
         return tbls
 
