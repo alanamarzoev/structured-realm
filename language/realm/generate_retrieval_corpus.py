@@ -105,6 +105,7 @@ def int_feature(values):
 
 def load_json_data(input_path):
   with tf.gfile.Open(input_path) as input_file:
+    import ipdb; ipdb.set_trace()
     for doc_idx, json_serialized in enumerate(input_file):
       yield doc_idx, json_serialized
       if doc_idx >= FLAGS.total_documents:
@@ -115,7 +116,6 @@ def generate_examples():
   """Generates serialized TF Examples."""
   doc_processor = DocumentProcessor(FLAGS.vocab_path, FLAGS.do_lower_case)
   for doc_idx, json_serialized in load_json_data(FLAGS.input_path):
-    import ipdb; ipdb.set_trace()
     yield doc_processor((doc_idx, json_serialized))
     if doc_idx >= FLAGS.total_documents:
       raise ValueError('Got more documents than expected.')
