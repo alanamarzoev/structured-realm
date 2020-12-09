@@ -112,6 +112,7 @@ def main(_):
 
   previous_export_path = None
   while True:
+    import ipdb; ipdb.set_trace()
     try:
       current_export_path = export_utils.best_export_path(
           FLAGS.model_dir, best_prefix="tf_hub")
