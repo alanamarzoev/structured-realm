@@ -19,7 +19,7 @@
 # Change the data and output directories here:
 
 # Data directory
-DATA_DIR='/raid/lingo/marzoev/structured-realm'
+DATA_DIR='gs://realm-data/realm-data-small'
 
 # Output directory
 MODEL_DIR='./out/'
