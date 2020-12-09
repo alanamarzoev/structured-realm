@@ -63,6 +63,7 @@ def convert_dataframes(tbls):
         for capt, info in tbls.items(): 
             info['title'] = capt 
             info['body'] = info['data'].to_string()
+            del info['data']
             jsoned = json.dumps(info)
             f.write(jsoned)
     gzipFile(path)
