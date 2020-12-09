@@ -26,7 +26,7 @@ import numpy as np
 
 
 def get_dataframes():
-    with open('tables_small.json', 'r') as j:
+    with open('tables_small.jsonl', 'r') as j:
         lines = j.readlines()
         tbls = {}
         for line in lines: 
@@ -54,46 +54,52 @@ def get_dataframes():
                 table_info['sec_title'] = sec_title 
                 table_info['title'] = title 
                 table_info['id'] = contents['tableId']
+                table_info['caption'] = caption 
                 tbls[caption] = table_info
             except Exception as e:
                 print('SKIPPING') 
                 continue 
+        with open('tables_preproc.jsonl', 'a+') as g: 
+            for k, v in tbls.items(): 
+                g.write(v) 
+                
         return tbls
 
 
-def load_doc(x):  
-    print(tf.executing_eagerly())
-    tbls = get_dataframes()
-    docs = []
-    # params_path = os.path.join('out', "estimator_params.json")
 
-    # with tf.gfile.GFile(params_path) as f:
-    #     params = json.load(f)
 
-    # tokenizer = featurization.Tokenizer(
-    #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
-    bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
-                                trainable=False)
-    vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
-    # to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
-    tokenizer = tokenization.FullTokenizer(
-    vocab_file=vocab_file, do_lower_case=True)
+# def load_doc(tbls):  
+#     print(tf.executing_eagerly())
+#     docs = []
+#     # params_path = os.path.join('out', "estimator_params.json")
 
-    for capt, tbl_info in tbls.items(): 
-        title = capt 
-        body = tbl_info['data'].to_string()
-        doc_uid = tbl_info['id']
-        title_token_ids = tokenizer.tokenize(title)
-        title_token_ids = tokenizer.convert_tokens_to_ids(title_token_ids)
-        body_token_ids = tokenizer.tokenize(body)
-        body_token_ids = tokenizer.convert_tokens_to_ids(body_token_ids)
-        doc = featurization.Document(
-            uid=doc_uid,
-            title_token_ids=title_token_ids,
-            body_token_ids=body_token_ids)
-        docs.append(doc)
+#     # with tf.gfile.GFile(params_path) as f:
+#     #     params = json.load(f)
+
+#     # tokenizer = featurization.Tokenizer(
+#     #     vocab_path=params["vocab_path"], do_lower_case=params["do_lower_case"])
+#     bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/1",
+#                                 trainable=False)
+#     vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
+#     # to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
+#     tokenizer = tokenization.FullTokenizer(
+#     vocab_file=vocab_file, do_lower_case=True)
+
+#     for capt, tbl_info in tbls.items(): 
+#         title = capt 
+#         body = tbl_info['data'].to_string()
+#         doc_uid = tbl_info['id']
+#         title_token_ids = tokenizer.tokenize(title)
+#         title_token_ids = tokenizer.convert_tokens_to_ids(title_token_ids)
+#         body_token_ids = tokenizer.tokenize(body)
+#         body_token_ids = tokenizer.convert_tokens_to_ids(body_token_ids)
+#         doc = featurization.Document(
+#             uid=doc_uid,
+#             title_token_ids=title_token_ids,
+#             body_token_ids=body_token_ids)
+#         docs.append(doc)
     
-    return docs
+#     return docs
 
 
 
