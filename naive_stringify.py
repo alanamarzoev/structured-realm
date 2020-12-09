@@ -1,3 +1,7 @@
+import tensorflow.compat.v1 as tf
+tf.enable_eager_execution()
+
+import tensorflow_hub as hub
 import json 
 import pandas as pd 
 from absl import app
@@ -19,12 +23,6 @@ from language.realm.refresh_doc_embeds import load_featurizer
 from subprocess import check_call
 
 import numpy as np
-import tensorflow.compat.v1 as tf
-import tensorflow_hub as hub
-
-tensorflow.compat.v1.enable_eager_execution(
-    config=None, device_policy=None, execution_mode=None
-)
 
 
 def get_dataframes():
