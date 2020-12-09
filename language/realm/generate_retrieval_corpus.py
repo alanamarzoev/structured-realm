@@ -61,6 +61,7 @@ class DocumentProcessor(object):
 
   def __call__(self, input_data):
     doc_idx, json_serialized = input_data
+    lines = json_serialized.readlines()
     doc_dict = json.loads(json_serialized)
     title = doc_dict['title']
     body = doc_dict['body']
@@ -105,7 +106,6 @@ def int_feature(values):
 
 def load_json_data(input_path):
   with tf.gfile.Open(input_path) as input_file:
-  
     for doc_idx, json_serialized in enumerate(input_file):
       yield doc_idx, json_serialized
       if doc_idx >= FLAGS.total_documents:
@@ -153,6 +153,7 @@ def main(unused_argv):
   docs_processed = 0
 
   examples = [None] * FLAGS.total_documents
+  print(len(results))
   for doc_idx, example in results:
     examples[doc_idx] = example
     docs_processed += 1
