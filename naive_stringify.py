@@ -61,8 +61,9 @@ def get_dataframes():
         return tbls
 
 
-def load_doc(tbls):  
+def load_doc(x):  
     print(tf.executing_eagerly())
+    tbls = get_dataframes()
     docs = []
     # params_path = os.path.join('out', "estimator_params.json")
 
@@ -92,7 +93,6 @@ def load_doc(tbls):
             body_token_ids=body_token_ids)
         docs.append(doc)
     
-    import ipdb; ipdb.set_trace()
     return docs
 
 
