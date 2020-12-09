@@ -10,9 +10,12 @@ from absl import logging
 from language.realm import featurization
 from language.realm import parallel
 from language.realm import profile
+from subprocess import check_call
+
 import numpy as np
 import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
+
 
 def get_dataframes():
     with open('tables_small.json', 'r') as j:
@@ -48,6 +51,22 @@ def get_dataframes():
                 continue 
         return tbls
 
+
+def gzipFile(path):
+    check_call('gzip ' + path)
+
+
+def convert_dataframes(tbls): 
+    json_list = []
+    path = 'dataset.tfrecord'
+    with open(path, 'a+') as f: 
+        for capt, info in tbls.items(): 
+            info['title'] = capt 
+            info['body'] = info['data'].to_string()
+            jsoned = info.to_json()
+            f.write(jsoned)
+    gzipFile(path)
+      
 
 def load_doc(path):  
     """Loads Documents from a GZIP-ed TFRecords file into a Python list."""
@@ -85,8 +104,11 @@ def load_doc(path):
 
 
 def main():
-    example_path = '/raid/lingo/marzoev/structured-realm/language/realm-data-small/pretrain_corpus_small/wikipedia_annotated_with_dates_public-00000-of-00020.tfrecord.gz'
-    load_doc(example_path)
+    # example_path = '/raid/lingo/marzoev/structured-realm/language/realm-data-small/pretrain_corpus_small/wikipedia_annotated_with_dates_public-00000-of-00020.tfrecord.gz'
+    # load_doc(example_path)
+    tbls = get_dataframes()
+    convert_dataframes(tbls)
+    load_doc('dataset.tfrecord.gz')
         
 
 if __name__ == '__main__': 
