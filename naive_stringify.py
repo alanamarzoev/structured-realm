@@ -106,7 +106,7 @@ def load_doc(tbls):
     return docs
 
 
-def main():
+def main(argv):
     # example_path = '/raid/lingo/marzoev/structured-realm/language/realm-data-small/pretrain_corpus_small/wikipedia_annotated_with_dates_public-00000-of-00020.tfrecord.gz'
     # load_doc(example_path)
     tbls = get_dataframes()
