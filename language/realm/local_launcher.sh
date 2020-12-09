@@ -129,7 +129,7 @@ launch_train_realm()
 case "$1" in
   refresh)
     # Run a server that re-encode the documents in the knowledge corpus.
-    launch_refresh_doc_embeds 2>&1 | tee -a "${LOG_DIR}/refresh.log"
+    launch_refresh_doc_embeds #2>&1 | tee -a "${LOG_DIR}/refresh.log"
     ;;
   gen-train)
     # Run a server that generates training examples.
