@@ -23,6 +23,10 @@ import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
 
 
+enable_eager_execution(
+    config=None, device_policy=None, execution_mode=None
+)
+
 
 def get_dataframes():
     with open('tables_small.json', 'r') as j:
