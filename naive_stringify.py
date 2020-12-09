@@ -61,18 +61,6 @@ def get_dataframes():
         return tbls
 
 
-# def convert_dataframes(tbls): 
-#     json_list = []
-#     path = 'dataset.tfrecord'
-#     with open(path, 'a+') as f: 
-#         for capt, info in tbls.items(): 
-#             info['title'] = capt 
-#             info['body'] = info['data'].to_string()
-#             del info['data']
-#             jsoned = json.dumps(info)
-            # f.write(jsoned)
-      
-
 def load_doc(tbls):  
     print(tf.executing_eagerly())
     docs = []
