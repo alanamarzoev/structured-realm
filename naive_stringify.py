@@ -23,7 +23,6 @@ def get_dataframes():
         tbls = {}
         for line in lines: 
             contents = json.loads(line)
-            import ipdb; ipdb.set_trace()
             table = {}
             col_order = []
             for i, col in enumerate(contents['tableHeaders'][0]): 
@@ -46,6 +45,7 @@ def get_dataframes():
                 table_info['data'] = tbl 
                 table_info['sec_title'] = sec_title 
                 table_info['title'] = title 
+                table_info['id'] = contents['tableId']
                 tbls[caption] = table_info
             except Exception as e:
                 print('SKIPPING') 
@@ -84,7 +84,7 @@ def load_doc(tbls):
         # doc_uid = featurization.get_document_uid(title, body)
         title_token_ids = get_ints_feature(ex, 'title_token_ids')
         body_token_ids = get_ints_feature(ex, 'body_token_ids')
-
+        doc_uid = tbl_info['id']
         doc = featurization.Document(
             uid=doc_uid,
             title_token_ids=title_token_ids,
