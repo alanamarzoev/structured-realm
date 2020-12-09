@@ -102,7 +102,7 @@ def main():
     load_doc(tbls)
         
 
-FLAGS = flags.FLAGS
+# FLAGS = flags.FLAGS
 flags.DEFINE_boolean('preserve_unused_tokens', True, '')
 
 
