@@ -112,6 +112,7 @@ class BruteForceRetriever(Retriever):
 
     # Check shapes.
     print('DOCS EMBEDS SHAPE: {} TOTAL CAND: {}'.format(self._doc_embeds.shape[0], total_candidates))
+    self._doc_embeds = self._doc_embeds[:total_candidates]
     if self._doc_embeds.shape[0] != total_candidates:
       raise ValueError('Did not load the right number of embeddings.')
 
