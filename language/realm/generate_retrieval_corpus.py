@@ -179,7 +179,6 @@ def main(unused_argv):
       start_idx = num_docs_per_shard * shard_idx
       stop_idx = min(start_idx + num_docs_per_shard, FLAGS.total_documents)
       print('start idx: {} stop idx: {}'.format(start_idx, stop_idx))
-      print(examples)
       for doc_idx in range(start_idx, stop_idx):
         output_writer.write(examples[doc_idx])
 
