@@ -170,10 +170,12 @@ def main(_):
             tpu_run_config=None)
 
       # Save the document embeddings to disk.
+      print('ENCODING')
       logging.info("Encoded shape: %s, dtype: %s", encoded.shape, encoded.dtype)
       encoded_path = os.path.join(hub_module_spec, "encoded", "encoded.ckpt")
       tf.gfile.MakeDirs(os.path.dirname(encoded_path))
       logging.info("Writing to checkpoint %s", encoded_path)
+      print("Writing to checkpoint %s", encoded_path)
       write_array_to_checkpoint("block_emb", encoded, encoded_path)
       logging.info("Done writing checkpoint.")
 
