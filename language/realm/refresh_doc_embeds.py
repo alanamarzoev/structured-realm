@@ -130,6 +130,7 @@ def main(_):
     # has been finalized, so it may appear after current_export_path changes.
     # Therefore, wait a bit, and behave gracefully if it's still not there.
     time.sleep(2.0)
+    import ipdb; ipdb.set_trace()
     try:
       step_count_filename = os.path.join(current_export_path or "",
                                          "global_step.txt")
