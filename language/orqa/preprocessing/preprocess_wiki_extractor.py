@@ -106,16 +106,14 @@ def main2(_):
   preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
                                                 FLAGS.max_block_length,
                                                 tokenizer)
-  print('hi2')
   with tf.python_io.TFRecordWriter("blocks.tfr") as blocks_writer:
     with tf.python_io.TFRecordWriter("examples.tfr") as examples_writer:
       with tf.python_io.TFRecordWriter("titles.tfr") as titles_writer:
-        import ipdb; ipdb.set_trace()
-        title, block, examples = create_block_info('tables_preproc.jsonl', preprocessor)
-        blocks_writer.write(block.encode("utf-8"))
-        examples_writer.write(examples)
-        titles_writer.write(title.encode("utf-8"))
-        print('hi3')
+        results = create_block_info('tables_preproc.jsonl', preprocessor)
+        for title, block, examples in results:
+          blocks_writer.write(block.encode("utf-8"))
+          examples_writer.write(examples)
+          titles_writer.write(title.encode("utf-8"))
   
 
 if __name__ == "__main__":
