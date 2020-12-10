@@ -117,7 +117,7 @@ launch_train_realm()
     --eval_throttle_secs=10 \
     --eval_start_delay_secs=10 \
     --num_eval_steps=50 \
-    --num_train_steps=1000 \
+    --num_train_steps=10000 \
     --train_preprocessing_servers="localhost:${TRAIN_EX_GENERATOR_PORT}" \
     --eval_preprocessing_servers="localhost:${EVAL_EX_GENERATOR_PORT}" \
     --num_input_threads=4
