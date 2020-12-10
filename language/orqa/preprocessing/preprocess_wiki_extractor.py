@@ -101,7 +101,7 @@ def main(_):
               tf.logging.info("Wrote %d blocks.", block_count)
   tf.logging.info("Wrote %d blocks in total.", block_count)
 
-def main2(): 
+def main2(_): 
   tokenizer = bert_utils.get_tokenizer(FLAGS.bert_hub_module_path)
   preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
                                                 FLAGS.max_block_length,
