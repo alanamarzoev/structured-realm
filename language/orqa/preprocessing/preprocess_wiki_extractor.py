@@ -101,5 +101,13 @@ def main(_):
               tf.logging.info("Wrote %d blocks.", block_count)
   tf.logging.info("Wrote %d blocks in total.", block_count)
 
+def main2(): 
+  tokenizer = bert_utils.get_tokenizer(FLAGS.bert_hub_module_path)
+  preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
+                                                FLAGS.max_block_length,
+                                                tokenizer)
+  create_block_info('tables_preproc.jsonl', preprocessor)
+
+
 if __name__ == "__main__":
-  app.run(main)
+  app.run(main2)
