@@ -46,7 +46,6 @@ def get_dataframes():
                     table[col_name].append(data)    
             try: 
                 tbl = pd.DataFrame.from_dict(table)
-                import ipdb; ipdb.set_trace()
                 caption = contents['tableCaption']
                 title = contents['pgTitle']
                 sec_title = contents['sectionTitle']
@@ -59,6 +58,7 @@ def get_dataframes():
                 tbls[caption] = table_info
             except Exception as e:
                 print(e) 
+                
                 continue 
         with open('tables_preproc_large.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
