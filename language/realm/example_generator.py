@@ -395,6 +395,7 @@ def load_latest_retriever(docs, featurizer):
       model_dir=experiment_utils.FLAGS.model_dir,
       hub_prefix='encoded',
       module_prefix='embedder')
+  
   if FLAGS.share_embedders:
     latest_query_embedder_path = latest_embedder_path
   else:
@@ -413,9 +414,9 @@ def load_latest_retriever(docs, featurizer):
                                      latest_embedder_path)
     assert model_timestamp_match
     model_timestamp = int(model_timestamp_match.group(1))
-
+  
   doc_embeds_path = os.path.join(latest_embedder_path, 'encoded/encoded.ckpt')
-
+  import ipdb; ipdb.set_trace()
   retriever = load_retriever(
       query_embedder_path=latest_query_embedder_path,
       docs=docs,
