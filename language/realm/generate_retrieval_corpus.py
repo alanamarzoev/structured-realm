@@ -31,7 +31,6 @@ from language.realm import parallel
 import tensorflow.compat.v1 as tf
 
 FLAGS = flags.FLAGS
-
 flags.DEFINE_string('input_path', None, 'Path to documents in JSONL format.')
 
 flags.DEFINE_string(
@@ -114,6 +113,8 @@ def load_json_data(input_path):
 def generate_examples():
   """Generates serialized TF Examples."""
   doc_processor = DocumentProcessor(FLAGS.vocab_path, FLAGS.do_lower_case)
+  x = load_json_data(FLAGS.input_path)
+  import ipdb; ipdb.set_trace()
   for doc_idx, json_serialized in load_json_data(FLAGS.input_path):
     yield doc_processor((doc_idx, json_serialized))
     if doc_idx >= FLAGS.total_documents:
