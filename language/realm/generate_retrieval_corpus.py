@@ -114,7 +114,7 @@ def generate_examples():
   """Generates serialized TF Examples."""
   doc_processor = DocumentProcessor(FLAGS.vocab_path, FLAGS.do_lower_case)
   x = load_json_data(FLAGS.input_path)
-  print(x)
+  print(len(list(x)))
   for doc_idx, json_serialized in load_json_data(FLAGS.input_path):
     yield doc_processor((doc_idx, json_serialized))
     if doc_idx >= FLAGS.total_documents:
