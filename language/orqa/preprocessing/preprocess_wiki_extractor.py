@@ -102,6 +102,10 @@ def main(_):
   tf.logging.info("Wrote %d blocks in total.", block_count)
 
 def main2(_): 
+  tf.io.gfile.makedirs(FLAGS.output_dir)
+  blocks_path = os.path.join(FLAGS.output_dir, "blocks.tfr")
+  examples_path = os.path.join(FLAGS.output_dir, "examples.tfr")
+  titles_path = os.path.join(FLAGS.output_dir, "titles.tfr")
   tokenizer = bert_utils.get_tokenizer(FLAGS.bert_hub_module_path)
   preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
                                                 FLAGS.max_block_length,
