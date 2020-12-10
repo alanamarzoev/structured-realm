@@ -102,6 +102,6 @@ def example_from_json_line(line, html_parser, preprocessor):
   data = json.loads(line)
   title = data["title"]
   if not remove_doc(title):
-    text = html_parser.unescape(data["text"])
+    text = html_parser.unescape(data["body"])
     for info in preprocessor.generate_block_info(title, text):
       yield info
