@@ -102,6 +102,7 @@ def main(_):
   tf.logging.info("Wrote %d blocks in total.", block_count)
 
 def main2(_): 
+  print('hi')
   tf.io.gfile.makedirs(FLAGS.output_dir)
   blocks_path = os.path.join(FLAGS.output_dir, "blocks.tfr")
   examples_path = os.path.join(FLAGS.output_dir, "examples.tfr")
@@ -110,7 +111,7 @@ def main2(_):
   preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
                                                 FLAGS.max_block_length,
                                                 tokenizer)
-
+  print('hi2')
   with tf.python_io.TFRecordWriter(blocks_path) as blocks_writer:
     with tf.python_io.TFRecordWriter(examples_path) as examples_writer:
       with tf.python_io.TFRecordWriter(titles_path) as titles_writer:
@@ -118,6 +119,7 @@ def main2(_):
         blocks_writer.write(block.encode("utf-8"))
         examples_writer.write(examples)
         titles_writer.write(title.encode("utf-8"))
+        print('hi3')
   
 
 if __name__ == "__main__":
