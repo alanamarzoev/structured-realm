@@ -46,6 +46,7 @@ def get_dataframes():
                     table[col_name].append(data)    
             try: 
                 tbl = pd.DataFrame.from_dict(table)
+                import ipdb; ipdb.set_trace()
                 caption = contents['tableCaption']
                 title = contents['pgTitle']
                 sec_title = contents['sectionTitle']
