@@ -57,7 +57,7 @@ def get_dataframes():
                 table_info['title'] = caption 
                 tbls[caption] = table_info
             except Exception as e:
-                print('SKIPPING') 
+                print(e) 
                 continue 
         with open('tables_preproc.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
