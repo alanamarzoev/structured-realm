@@ -107,6 +107,10 @@ def main2(_):
                                                 FLAGS.max_block_length,
                                                 tokenizer)
   create_block_info('tables_preproc.jsonl', preprocessor)
+  import ipdb; ipdb.set_trace()
+  # blocks_path = os.path.join(FLAGS.output_dir, "blocks.tfr")
+  # examples_path = os.path.join(FLAGS.output_dir, "examples.tfr")
+  # titles_path = os.path.join(FLAGS.output_dir, "titles.tfr")
 
 
 if __name__ == "__main__":
