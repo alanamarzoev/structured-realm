@@ -45,6 +45,7 @@ def get_dataframes():
                         continue
                     table[col_name].append(data)    
             try: 
+                print('tbls len: {}'.format(len(tbls)))
                 tbl = pd.DataFrame.from_dict(table)
                 caption = contents['tableCaption']
                 title = contents['pgTitle']
@@ -58,7 +59,6 @@ def get_dataframes():
                 tbls[caption] = table_info
             except Exception as e:
                 print(e) 
-                
                 continue 
         with open('tables_preproc_large.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
