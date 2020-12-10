@@ -46,6 +46,8 @@ def get_dataframes():
                     table[col_name].append(data)    
             try: 
                 print('tbls len: {}'.format(len(tbls)))
+                if len(tbls) > 1000: 
+                    break
                 tbl = pd.DataFrame.from_dict(table)
                 caption = contents['tableCaption']
                 title = contents['pgTitle']
