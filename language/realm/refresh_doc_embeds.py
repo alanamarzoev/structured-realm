@@ -135,7 +135,9 @@ def main(_):
                                          "global_step.txt")
       with tf.gfile.GFile(step_count_filename) as f:
         step_count = int(f.read())
+
     except (OSError, ValueError):
+      print('erroring')
       step_count = -1  # Check `is_training_done()` below.
 
     if step_count >= FLAGS.start_at_step:
@@ -170,7 +172,7 @@ def main(_):
             tpu_run_config=None)
 
       # Save the document embeddings to disk.
-      print('ENCODING')
+      print('saving')
       logging.info("Encoded shape: %s, dtype: %s", encoded.shape, encoded.dtype)
       encoded_path = os.path.join(hub_module_spec, "encoded", "encoded.ckpt")
       tf.gfile.MakeDirs(os.path.dirname(encoded_path))
