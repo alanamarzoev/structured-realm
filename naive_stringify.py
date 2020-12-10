@@ -26,7 +26,7 @@ import numpy as np
 
 
 def get_dataframes():
-    with open('tables_small.jsonl', 'r') as j:
+    with open('tables.jsonl', 'r') as j:
         lines = j.readlines()
         tbls = {}
         for line in lines: 
@@ -59,7 +59,7 @@ def get_dataframes():
             except Exception as e:
                 print(e) 
                 continue 
-        with open('tables_preproc.jsonl', 'a+') as g: 
+        with open('tables_preproc_large.jsonl', 'a+') as g: 
             for k, v in tbls.items(): 
                 g.write(json.dumps(v) + '\n') 
 
