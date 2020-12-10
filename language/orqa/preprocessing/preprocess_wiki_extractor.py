@@ -102,19 +102,14 @@ def main(_):
   tf.logging.info("Wrote %d blocks in total.", block_count)
 
 def main2(_): 
-  print('hi')
-  tf.io.gfile.makedirs(FLAGS.output_dir)
-  blocks_path = os.path.join(FLAGS.output_dir, "blocks.tfr")
-  examples_path = os.path.join(FLAGS.output_dir, "examples.tfr")
-  titles_path = os.path.join(FLAGS.output_dir, "titles.tfr")
   tokenizer = bert_utils.get_tokenizer(FLAGS.bert_hub_module_path)
   preprocessor = wiki_preprocessor.Preprocessor(get_sentence_splitter(),
                                                 FLAGS.max_block_length,
                                                 tokenizer)
   print('hi2')
-  with tf.python_io.TFRecordWriter(blocks_path) as blocks_writer:
-    with tf.python_io.TFRecordWriter(examples_path) as examples_writer:
-      with tf.python_io.TFRecordWriter(titles_path) as titles_writer:
+  with tf.python_io.TFRecordWriter("blocks.tfr") as blocks_writer:
+    with tf.python_io.TFRecordWriter("examples.tfr") as examples_writer:
+      with tf.python_io.TFRecordWriter("titles.tfr") as titles_writer:
         title, block, examples = create_block_info('tables_preproc.jsonl', preprocessor)
         blocks_writer.write(block.encode("utf-8"))
         examples_writer.write(examples)
