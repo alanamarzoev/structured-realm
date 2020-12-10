@@ -44,10 +44,10 @@ ICT_MODULE_PATH="${DATA_DIR}/small-ict"
 VOCAB_PATH="${ICT_MODULE_PATH}/assets/vocab.txt"
 
 # Port for the training example generator
-TRAIN_EX_GENERATOR_PORT=8888
+TRAIN_EX_GENERATOR_PORT=8988
 
 # Port for the evaluation example generator
-EVAL_EX_GENERATOR_PORT=8889
+EVAL_EX_GENERATOR_PORT=8989
 
 # Log directory
 LOG_DIR="${MODEL_DIR}/log/"
